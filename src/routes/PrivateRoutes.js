@@ -1,13 +1,25 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react"
 import PropTypes from "prop-types"
-import { Route } from "react-router-dom"
+import { Route, Redirect } from "react-router-dom"
+import { AuthToken } from "utils"
 
 const propTypes = {
-  component: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  component: PropTypes.func.isRequired,
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => <Route {...rest} />
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      AuthToken.loggedIn() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/pages/login" />
+      )
+    }
+  />
+)
 
 PrivateRoute.propTypes = propTypes
 
