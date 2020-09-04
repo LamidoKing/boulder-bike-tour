@@ -5,6 +5,8 @@ import { history } from "utils"
 import App from "App"
 import * as serviceWorker from "serviceWorker"
 
+import "assets/scss/material-kit-react.scss"
+
 const hist = history
 
 ReactDOM.render(

@@ -1,4 +1,6 @@
 src/serviceWorker.js
 src/App.test.js
+src/assets
+src/components
 
 node_modules
