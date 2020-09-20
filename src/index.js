@@ -1,18 +1,17 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Router } from "react-router-dom"
-import { history } from "utils"
+import { ThemeProvider } from "@material-ui/styles"
+import { BrowserRouter } from "react-router-dom"
+import theme from "styles/Theme/Theme"
 import App from "App"
 import * as serviceWorker from "serviceWorker"
 
-import "assets/scss/material-kit-react.scss"
-
-const hist = history
-
 ReactDOM.render(
-  <Router history={hist}>
-    <App />
-  </Router>,
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 )
 

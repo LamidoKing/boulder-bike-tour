@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       AuthToken.loggedIn() ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/pages/login" />
+        <Redirect to="/admin/login" />
       )
     }
   />
