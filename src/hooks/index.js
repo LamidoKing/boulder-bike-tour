@@ -1,4 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 import useFetch from "./usePost"
+import usePageBotton from "./usePageBotton"
+import usePrevious from "./usePrevious"
 
-export { useFetch }
+export { useFetch, usePageBotton, usePrevious }

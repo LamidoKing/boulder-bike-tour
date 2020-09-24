@@ -1,4 +1,5 @@
 import Home from "pages/Home/Home"
+import Photos from "pages/Photos/Photos"
 
 const pagesRoutes = [
   {
@@ -9,7 +10,7 @@ const pagesRoutes = [
   {
     path: "/photos",
     name: "Photos",
-    component: Home,
+    component: Photos,
   },
   {
     path: "/locations",

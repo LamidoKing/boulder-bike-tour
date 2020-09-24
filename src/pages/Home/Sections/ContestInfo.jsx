@@ -8,12 +8,12 @@ const ContestInfo = () => {
     <div className={classes.root}>
       <Paper className={classes.paper2} elevation={6} color="primary">
         <div>
-          <Typography variant="h4" color="white" className={classes.title}>
+          <Typography variant="h4" className={classes.title}>
             Contest !
           </Typography>
         </div>
         <div>
-          <Typography variant="h6" color="white" className={classes.text}>
+          <Typography variant="h6" className={classes.text}>
             The Organizers are sponsoring or anyone to come up with a slogon for
             the race
           </Typography>

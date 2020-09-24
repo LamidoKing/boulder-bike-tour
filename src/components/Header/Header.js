@@ -52,7 +52,6 @@ const Header = (props) => {
             <IconButton
               edge="start"
               className={classes.menuButton}
-              color="black"
               aria-label="open drawer"
             >
               <DirectionsBikeIcon />

@@ -44,7 +44,7 @@ const Counter = (props) => {
     <div className={classes.root}>
       <Paper className={classes.paper1} elevation={6} color="primary">
         <div>
-          <Typography variant="h4" color="white" className={classes.title}>
+          <Typography variant="h4" className={classes.title}>
             Welcome To Builder Bike Tour
           </Typography>
           <div className={classes.count}>
