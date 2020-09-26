@@ -21,6 +21,7 @@ const DiaLog = (prop) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="max-width-dialog-title"
+        PaperProps={classes.dialog}
       >
         <div className={classes.form}>
           <img src={image} alt="..." />
