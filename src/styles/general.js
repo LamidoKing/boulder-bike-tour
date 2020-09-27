@@ -1,11 +1,10 @@
 // eslint-disable-next-line import/prefer-default-export
 const paper = {
   opacity: 0.99,
-  background: "red",
+  background: "#f44336",
   position: "relative",
   zIndex: "3",
   borderRadius: "20px",
-  boxShadow: `0 16px 24px 2px black`,
   "@media (max-width: 576px)": {
     marginTop: "-30px",
   },

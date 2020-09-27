@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 import Marker from "./Maker";
 import mapStyles from "styles/components/mapStyles";
 
-const Map2 = (prop) => {
+const Map = (props) => {
   const classes = mapStyles();
-  const { center, locations } = prop;
+  const { center, locations } = props;
   return (
     <div className={classes.map}>
       <GoogleMapReact
@@ -29,4 +30,8 @@ const Map2 = (prop) => {
   );
 };
 
-export default Map2;
+Map.propTypes = {
+  locations: PropTypes.array.isRequired,
+  center: PropTypes.object.isRequired,
+};
+export default Map;

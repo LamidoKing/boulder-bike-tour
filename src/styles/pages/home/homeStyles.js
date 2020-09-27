@@ -25,6 +25,7 @@ const homeStyle = makeStyles(() => ({
   root: {
     background: `url(${home})`,
     paddingBottom: "60px",
+    backgroundBlendMode: "black",
     "&:before": {
       background: "rgba(0, 0, 0, 0.5)",
     },

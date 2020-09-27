@@ -1,6 +1,7 @@
 import Home from "pages/Home/Home"
 import Photos from "pages/Photos/Photos"
 import Location from "pages/Location/Location"
+import Riders from "pages/Riders/Riders"
 
 const pagesRoutes = [
   {
@@ -21,7 +22,7 @@ const pagesRoutes = [
   {
     path: "/riders",
     name: "Riders",
-    component: Home,
+    component: Riders,
   },
   {
     path: "/contest",

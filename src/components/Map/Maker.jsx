@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import image from "assets/img/maker.jpg";
 import mapStyles from "styles/components/mapStyles";
 
-const Makers = (prop) => {
+const Makers = (props) => {
   const classes = mapStyles();
   const [open, setOpen] = useState(false);
-  const { location } = prop;
+  const { location } = props;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,7 +28,7 @@ const Makers = (prop) => {
         aria-describedby="alert-dialog-description"
         PaperProps={{
           style: {
-            backgroundColor: "red",
+            backgroundColor: "#f44336",
             borderRadius: "30px",
           },
         }}
@@ -60,6 +61,10 @@ const Makers = (prop) => {
       />
     </div>
   );
+};
+
+Makers.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default Makers;
