@@ -1,7 +1,14 @@
 import React from "react";
-import { makeStyles, Dialog } from "@material-ui/core";
+import {
+  makeStyles,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  Button,
+} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   form: {
     display: "flex",
     flexDirection: "column",
@@ -12,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DiaLog = (prop) => {
   const classes = useStyles();
-  const { open, image, handleClose } = prop;
+  const { open, image, handleClose, message } = prop;
 
   return (
     <>
@@ -21,11 +28,28 @@ const DiaLog = (prop) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="max-width-dialog-title"
-        PaperProps={classes.dialog}
+        PaperProps={{
+          style: {
+            backgroundColor: "#424242",
+          },
+        }}
       >
-        <div className={classes.form}>
-          <img src={image} alt="..." />
-        </div>
+        {image ? (
+          <div className={classes.form}>
+            <img src={image} alt="..." />
+          </div>
+        ) : (
+          <>
+            <DialogContent>
+              <DialogContentText color="secondary">{message}</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button color="primary" onClick={handleClose}>
+                ok
+              </Button>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
     </>
   );
