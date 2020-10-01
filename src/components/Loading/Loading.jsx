@@ -8,15 +8,25 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
+  topMargin: {
+    marginTop: "64px",
+    "@media (max-width: 576px)": {
+      marginTop: "30px",
+    },
+  },
 }));
 
 const Loading = (props) => {
   const classes = useStyles();
-  const { status } = props;
+  const { status, top } = props;
+  const mTop = top ? classes.topMargin : "";
 
   return (
     <div>
-      <Backdrop className={classes.backdrop} open={status === "fetching"}>
+      <Backdrop
+        className={classes.backdrop + mTop}
+        open={status === "fetching"}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>

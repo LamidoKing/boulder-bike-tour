@@ -1,9 +1,12 @@
 import React from "react"
 import { Typography, Paper, Button } from "@material-ui/core"
 import contestInfoStyles from "styles/pages/home/sections/contestInfoStyles"
+import { useHistory } from "react-router-dom"
 
 const ContestInfo = () => {
   const classes = contestInfoStyles()
+  const history = useHistory()
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper2} elevation={6} color="primary">
@@ -24,6 +27,7 @@ const ContestInfo = () => {
             size="large"
             color="secondary"
             className={classes.button}
+            onClick={() => history.push("/contest")}
           >
             summit slogoan
           </Button>

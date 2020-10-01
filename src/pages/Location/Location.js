@@ -29,7 +29,7 @@ const Location = () => {
 
   return (
     <div className={classes.root}>
-      <Loading status={status} />
+      <Loading status={status} top />
       {status === "fetched" && <Map center={center} locations={data} />}
     </div>
   )

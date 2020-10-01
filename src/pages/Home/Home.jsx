@@ -5,6 +5,7 @@ import homeStyle from "styles/pages//home/homeStyles"
 import { useTimer } from "hooks"
 import Counter from "./Sections/Counter"
 import ContestInfo from "./Sections/ContestInfo"
+import Photos from "./Sections/Photos"
 
 const Home = () => {
   const classes = homeStyle()
@@ -17,6 +18,7 @@ const Home = () => {
       <Parallax image={pImage} />
       <Counter days={days} hours={hours} minutes={minutes} seconds={seconds} />
       <ContestInfo />
+      <Photos image={pImage} />
     </div>
   )
 }

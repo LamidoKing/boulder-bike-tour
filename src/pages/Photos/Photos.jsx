@@ -8,7 +8,7 @@ const Photos = () => {
   const classes = photosStyles()
   const [url, setUrl] = useState()
   const getUrl = (value) => {
-    return `${Urls.flickrApi}&api_key=${process.env.REACT_APP_API_KEY}&tags=bike&per_page=20&page=${value}&format=json&nojsoncallback=1`
+    return `${Urls.flickrApi}&api_key=${process.env.REACT_APP_API_KEY}&tags=bikerace&per_page=40&page=${value}&format=json&nojsoncallback=1`
   }
   const [page, setPage] = useState(1)
 

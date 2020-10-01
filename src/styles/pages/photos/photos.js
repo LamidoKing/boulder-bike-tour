@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core"
 import { container } from "styles/general"
 
-const photosStyle = makeStyles((theme) => ({
+const photosStyle = makeStyles(() => ({
   container,
   root: {
     background: "#424242",
@@ -12,7 +12,7 @@ const photosStyle = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#424242",
   },
   image: {
     cursor: "pointer",
