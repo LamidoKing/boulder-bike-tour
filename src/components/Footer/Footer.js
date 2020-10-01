@@ -1,5 +1,11 @@
 import React from "react";
-import { Typography, AppBar, CssBaseline, Toolbar } from "@material-ui/core";
+import {
+  Typography,
+  AppBar,
+  CssBaseline,
+  Toolbar,
+  Hidden,
+} from "@material-ui/core";
 import Links from "components/Header/HeaderLinks";
 import footerStyles from "styles/components/footerStyles";
 
@@ -11,7 +17,9 @@ const Footer = () => {
       <CssBaseline />
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar>
-          <Links />
+          <Hidden smDown implementation="css">
+            <Links />
+          </Hidden>
           <div className={classes.grow} />
           <Typography className={classes.title} variant="h6" noWrap>
             © 2020 Bulder Biker Tour
