@@ -1,5 +1,6 @@
 import React from "react"
 import Map from "components/Map/Map"
+import Loading from "components/Loading/Loading"
 import { useFetch } from "hooks"
 import { Urls } from "utils"
 import locationStyles from "styles/pages/locations/location"
@@ -28,6 +29,7 @@ const Location = () => {
 
   return (
     <div className={classes.root}>
+      <Loading status={status} />
       {status === "fetched" && <Map center={center} locations={data} />}
     </div>
   )
