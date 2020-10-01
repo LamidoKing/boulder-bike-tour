@@ -1,25 +1,30 @@
 import { makeStyles } from "@material-ui/core"
 import { container } from "styles/general"
 
-const photosStyle = makeStyles(() => ({
+const photosStyle = makeStyles((theme) => ({
   container,
   root: {
     background: "#424242",
     minHeight: "100vh",
   },
-  card: {
-    display: "inline-block",
-    position: "relative",
-    width: "100%",
-    maxHeight: "160px",
-    margin: "10px 0",
-    // boxShadow: `0 5px 12px 1px black`,
-    // borderRadius: "3px",
-    color: "rgba(0, 0, 0, 0.87)",
-    background: "#fff",
-    borderRadius: "6px",
-    // borderTop: "2px solid yellow",
-    boxShadow: "0 5px 15px -8px black)",
+  grid: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper,
+  },
+  image: {
+    cursor: "pointer",
+    transition: "transform 2s, filter 1.5s ease-in-out",
+    transformOrigin: "center center",
+    filter: "brightness(80%)",
+
+    "&:hover": {
+      transform: "scale(1.9)",
+
+      filter: "brightness(50%)",
+    },
   },
 }))
 

@@ -6,14 +6,14 @@ import PhotoList from "./Sections/PhotoList"
 
 const Photos = () => {
   const classes = photosStyles()
-
+  const [url, setUrl] = useState()
   const getUrl = (value) => {
     return `${Urls.flickrApi}&api_key=${process.env.REACT_APP_API_KEY}&tags=bike&per_page=20&page=${value}&format=json&nojsoncallback=1`
   }
   const [page, setPage] = useState(1)
 
   const { data, status } = useFetch({ url: getUrl(1), method: "GET" })
-  const more = useFetch({ url: getUrl(page), method: "GET" })
+  const more = useFetch({ url, method: "GET" })
 
   const [photos, setPhotos] = useState([])
   let isBottom = usePageBotton()
@@ -23,15 +23,26 @@ const Photos = () => {
 
   const morePhotos = more.status === "fetched" ? more.data.photos.photo : []
 
-  const fetchPhoto = () => {
-    if (status === "fetched") {
-      setPhotos(data.photos.photo)
+  useEffect(() => {
+    const fetchPhoto = () => {
+      if (status === "fetched") {
+        setPhotos(data.photos.photo)
+      }
     }
-  }
+    fetchPhoto()
+  }, [status, data.photos])
+
   const fetchMore = () => {
     let newPhotos
+    if (more.status === "fetching") {
+      isBottom = false
+      return
+    }
 
-    setPage(prevPage + 1)
+    const nextPage = prevPage ? prevPage + 1 : page + 1
+    setPage(nextPage)
+    setUrl(getUrl(nextPage))
+
     if (more.status === "fetched") {
       newPhotos = prevPhotos.concat(morePhotos)
       setPhotos(newPhotos)
@@ -41,18 +52,13 @@ const Photos = () => {
   }
 
   useEffect(() => {
-    fetchPhoto()
-  }, [status])
-
-  useEffect(() => {
-    if (isBottom && more.status === "fetched") {
-      fetchMore()
-    }
+    fetchMore()
 
     return () => {
       fetchMore()
     }
-  }, [isBottom, page])
+    // eslint-disable-next-line
+  }, [isBottom]);
 
   return (
     <div className={classes.root}>

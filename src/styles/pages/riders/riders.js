@@ -33,7 +33,7 @@ const ridersStyle = makeStyles(() => ({
     height: "100px",
     borderRadius: "50% !important",
     boxShadow: "0 5px 15px -8px white",
-    transform: "translate3d(0, -50%, 0)",
+    transform: "translate3d(0, -40%, 0)",
   },
   align: {
     textAlign: "center",

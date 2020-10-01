@@ -1,12 +1,12 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Dialog from "components/Dialog/Dialog"
-import { Box, Card, CardActionArea, CardMedia } from "@material-ui/core"
+import { GridList, GridListTile } from "@material-ui/core"
 import Skeleton from "@material-ui/lab/Skeleton"
-import GridContainer from "components/Grid/GridContainer"
-import GridItem from "components/Grid/GridItem"
 import photostyles from "styles/pages/photos/photos"
 
 const PhotoList = (props) => {
@@ -28,59 +28,49 @@ const PhotoList = (props) => {
   return (
     <>
       <Dialog open={open} image={image} handleClose={handleClose} />
-      <GridContainer>
+      <GridList cellHeight={200} cols={3} className={classes.grid}>
         {status === "fetched"
           ? photos.map((photo) => {
               return (
-                <GridItem xs={12} sm={6} md={4} lg={4} key={photo.id}>
-                  <Card className={classes.card}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        alt="Contemplative Reptile"
-                        className={classes.media}
-                        image={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`}
-                        title="Contemplative Reptile"
-                        onClick={() =>
-                          handleClickOpen(
-                            `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`
-                          )
-                        }
-                      />
-                    </CardActionArea>
-                  </Card>
-                </GridItem>
+                <GridListTile key={photo.id} cols={photo.cols || 1}>
+                  <img
+                    src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`}
+                    alt={photo.title}
+                    onClick={() =>
+                      handleClickOpen(
+                        `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`
+                      )
+                    }
+                    className={classes.image}
+                  />
+                </GridListTile>
               )
             })
           : Array.from(new Array(20)).map((i, index) => {
               return (
-                <GridItem xs={12} sm={6} md={4} lg={4} key={index}>
-                  <Box>
-                    <Skeleton
-                      animation="wave"
-                      height={200}
-                      className={classes.card}
-                    />
-                  </Box>
-                </GridItem>
+                <GridListTile key={index} cols={1}>
+                  <Skeleton
+                    animation="wave"
+                    height={200}
+                    className={classes.card}
+                  />
+                </GridListTile>
               )
             })}
         {moreFetchStatus === "fetching" &&
           status === "fetched" &&
           Array.from(new Array(20)).map((i, index) => {
             return (
-              <GridItem xs={12} sm={6} md={4} lg={4} key={index}>
-                <Box>
-                  <Skeleton
-                    height={200}
-                    animation="wave"
-                    className={classes.card}
-                  />
-                </Box>
-              </GridItem>
+              <GridListTile key={index} cols={1}>
+                <Skeleton
+                  height={200}
+                  animation="wave"
+                  className={classes.card}
+                />
+              </GridListTile>
             )
           })}
-      </GridContainer>
+      </GridList>
     </>
   )
 }

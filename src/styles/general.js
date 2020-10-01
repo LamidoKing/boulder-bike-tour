@@ -6,7 +6,7 @@ const paper = {
   zIndex: "3",
   borderRadius: "20px",
   "@media (max-width: 576px)": {
-    marginTop: "-30px",
+    marginTop: "30px",
   },
   "@media (max-width: 830px)": {
     marginLeft: "10px",
@@ -15,11 +15,12 @@ const paper = {
 }
 
 const containerFluid = {
-  paddingRight: "15px",
-  paddingLeft: "15px",
+  paddingTop: "15px",
+  paddingRight: "5px",
+  paddingLeft: "5px",
   marginRight: "auto",
   marginLeft: "auto",
-  width: "100%",
+  width: "auto",
 }
 const container = {
   ...containerFluid,
