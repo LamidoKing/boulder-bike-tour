@@ -1,13 +1,12 @@
 import React from "react"
+import Drawer from "components/Drawer/Drawer"
 
 const Admin = () => {
   return (
-    <div>
-      <h1>hello admin</h1>
-    </div>
+    <>
+      <Drawer />
+    </>
   )
 }
-
-Admin.propTypes = {}
 
 export default Admin
