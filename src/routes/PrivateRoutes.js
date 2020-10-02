@@ -12,11 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      AuthToken.loggedIn() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/admin/login" />
-      )
+      AuthToken.loggedIn() ? <Component {...props} /> : <Redirect to="/login" />
     }
   />
 )
