@@ -13,9 +13,10 @@ import {
 } from "@material-ui/core"
 import Input from "components/CustomTextField/CustomTextField"
 import { DirectionsBike, Visibility, VisibilityOff } from "@material-ui/icons"
-import { Urls } from "utils"
+import { Urls, AuthToken } from "utils"
 import Loading from "components/Loading/Loading"
 import { useFetch } from "hooks"
+
 import loginStyles from "styles/adminPage/login/login"
 
 function Copyright() {
@@ -35,17 +36,21 @@ const SignIn = () => {
   const classes = loginStyles()
   const history = useHistory()
   const [body, setBody] = useState()
-  const { status, error } = useFetch({
+  const { data, status, error } = useFetch({
     url: `${Urls.bbtApiUrl}/admins/login`,
     body,
     method: "POST",
   })
 
   useEffect(() => {
-    if (status === "fetched") {
+    if (status === "fetched" && data.token) {
+      AuthToken.setToken(data.token)
+    }
+
+    if (data.token) {
       history.push("/admin")
     }
-  }, [status, history])
+  })
 
   const [values, setValues] = useState({
     email: "",
