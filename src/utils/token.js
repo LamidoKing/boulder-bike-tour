@@ -1,9 +1,30 @@
 const setToken = (idToken) => {
-  localStorage.setItem("TOKEN", idToken)
+  const now = new Date()
+
+  const token = {
+    token: idToken,
+    expiry: now.getTime() + 86400000,
+  }
+
+  localStorage.setItem("TOKEN", JSON.stringify(token))
 }
 
 const getToken = () => {
-  return localStorage.getItem("TOKEN")
+  const appToken = localStorage.getItem("TOKEN")
+
+  if (!appToken) {
+    return null
+  }
+
+  const { expiry, token } = JSON.parse(appToken)
+  const now = new Date()
+
+  if (now.getTime() > expiry) {
+    localStorage.removeItem("TOKEN")
+    return null
+  }
+
+  return token
 }
 
 const loggedIn = () => {

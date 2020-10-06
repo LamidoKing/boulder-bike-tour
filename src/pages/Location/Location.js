@@ -14,14 +14,18 @@ const Location = () => {
   })
 
   const findcenter = (locations) => {
+    const { length } = locations
+
     let centerLat = 0
     let centerLng = 0
+
     locations.forEach((loc) => {
       centerLat += parseFloat(loc.latitude)
       centerLng += parseFloat(loc.longitude)
     })
-    const lat = centerLat / 20
-    const lng = centerLng / 20
+
+    const lat = centerLat / length
+    const lng = centerLng / length
     return { lat, lng }
   }
 

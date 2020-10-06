@@ -17,6 +17,7 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
+import AddRider from "adminPage/AdminRiders/AddEditRider";
 import dashBoardRoutes from "routes/admin";
 import { AuthToken } from "utils";
 import drawerStyles from "styles/components/drawer";
@@ -41,19 +42,24 @@ const MiniDrawer = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const leftPanelLinks = dashBoardRoutes.map((prop) => (
-    <ListItem
-      button
-      key={prop.path}
-      onClick={() => history.push(prop.path)}
-      className={classes.whiteColor}
-    >
-      <ListItemIcon className={classes.whiteColor}>
-        <prop.icon />
-      </ListItemIcon>
-      <ListItemText primary={prop.name} />
-    </ListItem>
-  ));
+  const leftPanelLinks = dashBoardRoutes.map((prop) => {
+    if (prop.redirect) {
+      return <Redirect from={prop.path} to={prop.pathTo} key={prop.path} />;
+    }
+    return (
+      <ListItem
+        button
+        key={prop.path}
+        onClick={() => history.push(prop.path)}
+        className={classes.whiteColor}
+      >
+        <ListItemIcon className={classes.whiteColor}>
+          <prop.icon />
+        </ListItemIcon>
+        <ListItemText primary={prop.name} />
+      </ListItem>
+    );
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -93,6 +99,7 @@ const MiniDrawer = () => {
             Mini variant drawer
           </Typography>
           <div>
+            <AddRider type="add" />
             <Button className={classes.whiteColor} onClick={handleLogout}>
               Logout
             </Button>

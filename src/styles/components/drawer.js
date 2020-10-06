@@ -86,6 +86,7 @@ const drawerStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    // background: "#424242",
   },
   whiteColor: {
     color: "white",

@@ -127,7 +127,7 @@ const Contest = () => {
   useEffect(() => {
     const handleNotification = () => {
       if (status === "error") {
-        setMessage(`Email ${error.data.email[0]}`)
+        setMessage(`Email ${error && error.data.email[0]}`)
         setOpen(true)
         return true
       }

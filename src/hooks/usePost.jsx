@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { useEffect, useRef, useReducer } from "react"
-import { Request, AuthToken } from "utils"
+import { Request } from "utils"
 
 const useFetch = ({ url, body = null, method = "" }) => {
   const cache = useRef({})
@@ -27,8 +27,12 @@ const useFetch = ({ url, body = null, method = "" }) => {
 
   useEffect(() => {
     let cancelRequest = false
-    if (!url && !method && method === "POST" && !body) return
-    if (method === "POST" && !body) return
+    if (!url) return
+    if (method === "POST" || method === "PATCH") {
+      if (!body) return
+    }
+    // if (!url && !method && method === ("POST" || "PATCH") && !body) return
+    // if (method === ("POST" || "PATCH") && !body) return
 
     const fetchData = async () => {
       dispatch({ type: "FETCHING" })
@@ -42,10 +46,6 @@ const useFetch = ({ url, body = null, method = "" }) => {
 
           if (cancelRequest) return
           dispatch({ type: "FETCHED", payload: data.data })
-
-          if (data.data.token) {
-            AuthToken.setToken(data.data.token)
-          }
         } catch (error) {
           if (cancelRequest) return
           dispatch({ type: "FETCH_ERROR", payload: error.response })

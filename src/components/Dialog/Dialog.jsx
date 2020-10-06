@@ -1,6 +1,8 @@
 import React from "react";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   makeStyles,
+  useTheme,
   Dialog,
   DialogActions,
   DialogContent,
@@ -19,7 +21,9 @@ const useStyles = makeStyles(() => ({
 
 const DiaLog = (prop) => {
   const classes = useStyles();
-  const { open, image, handleClose, message } = prop;
+  const theme = useTheme();
+  const { open, image, handleClose, message, Component } = prop;
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <>
@@ -33,12 +37,14 @@ const DiaLog = (prop) => {
             backgroundColor: "#424242",
           },
         }}
+        fullScreen={Component && fullScreen}
       >
-        {image ? (
+        {image && (
           <div className={classes.form}>
             <img src={image} alt="..." />
           </div>
-        ) : (
+        )}
+        {message && (
           <>
             <DialogContent>
               <DialogContentText color="secondary">{message}</DialogContentText>
@@ -50,6 +56,7 @@ const DiaLog = (prop) => {
             </DialogActions>
           </>
         )}
+        {Component && Component}
       </Dialog>
     </>
   );
