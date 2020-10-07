@@ -1,24 +1,26 @@
-import React from "react";
-import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Hidden from "@material-ui/core/Hidden";
-import Fab from "@material-ui/core/Fab";
-import IconButton from "@material-ui/core/IconButton";
-import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
-import Menu from "@material-ui/icons/Menu";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import ScrollTop from "./ScrollTop";
-import ElevationScroll from "./ElevationScroll";
-import Links from "components/Header/HeaderLinks";
-import headerStyle from "styles/components/headerStyle";
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react"
+import PropTypes from "prop-types"
+import AppBar from "@material-ui/core/AppBar"
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import Hidden from "@material-ui/core/Hidden"
+import Fab from "@material-ui/core/Fab"
+import IconButton from "@material-ui/core/IconButton"
+import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike"
+import Menu from "@material-ui/icons/Menu"
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
+import Links from "components/Header/HeaderLinks"
+import headerStyle from "styles/components/headerStyle"
+import ScrollTop from "./ScrollTop"
+import ElevationScroll from "./ElevationScroll"
 
 const Header = (props) => {
-  const classes = headerStyle();
-  const [state, setState] = React.useState({ left: false });
+  const classes = headerStyle()
+  const [state, setState] = React.useState({ left: false })
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -26,11 +28,11 @@ const Header = (props) => {
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      return;
+      return
     }
 
-    setState({ ...state, [anchor]: open });
-  };
+    setState({ ...state, [anchor]: open })
+  }
 
   const list = (anchor) => (
     <div
@@ -41,7 +43,7 @@ const Header = (props) => {
     >
       <Links />
     </div>
-  );
+  )
 
   return (
     <>
@@ -95,11 +97,11 @@ const Header = (props) => {
         </Fab>
       </ScrollTop>
     </>
-  );
-};
+  )
+}
 
 Header.propTypes = {
   children: PropTypes.element,
-};
+}
 
-export default Header;
+export default Header

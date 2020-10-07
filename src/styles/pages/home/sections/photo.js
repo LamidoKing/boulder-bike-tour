@@ -91,6 +91,11 @@ const HomePhotosStyle = makeStyles((theme) => ({
     left: "calc(50% - 9px)",
     transition: theme.transitions.create("opacity"),
   },
+  title: {
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "white",
+  },
 }))
 
 export default HomePhotosStyle

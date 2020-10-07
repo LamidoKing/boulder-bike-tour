@@ -17,7 +17,7 @@ const Contest = () => {
   const [open, setOpen] = useState(false)
   const [succesDiaog, setSuccesDiaog] = useState(false)
   const [disableButton, setDisableButton] = useState(true)
-  const [message, setMessage] = useState(false)
+  const [message, setMessage] = useState("")
   const [body, setBody] = useState()
   const [values, setValues] = useState({
     first_name: "",
@@ -127,7 +127,10 @@ const Contest = () => {
   useEffect(() => {
     const handleNotification = () => {
       if (status === "error") {
-        setMessage(`Email ${error && error.data.email[0]}`)
+        const errorMessage = error
+          ? `Email ${error.data.email[0]}`
+          : "Network Error Check Your Internet Connetion"
+        setMessage(errorMessage)
         setOpen(true)
         return true
       }

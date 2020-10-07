@@ -1,13 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike"
-import {
-  Typography,
-  Paper,
-  CircularProgress,
-  Box,
-  IconButton,
-} from "@material-ui/core"
+import { Typography, Paper, CircularProgress, Box } from "@material-ui/core"
 import counterStyles from "styles/pages/home/sections/counterStyles"
 
 const Counter = (props) => {
@@ -103,9 +97,10 @@ const Counter = (props) => {
 
         <Typography className={classes.title} variant="h6" noWrap>
           TOGO
-          <IconButton className={classes.icon}>
-            <DirectionsBikeIcon fontSize="large" />
-          </IconButton>
+          <span className={classes.icon}>
+            {" "}
+            <DirectionsBikeIcon />
+          </span>
         </Typography>
       </Paper>
     </div>

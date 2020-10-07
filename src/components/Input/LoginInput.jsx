@@ -1,5 +1,5 @@
-import { withStyles } from "@material-ui/styles";
-import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/styles"
+import TextField from "@material-ui/core/TextField"
 
 const Input = withStyles(({ filed, hover, focused }) => ({
   root: {
@@ -15,6 +15,6 @@ const Input = withStyles(({ filed, hover, focused }) => ({
       },
     },
   },
-}))(TextField);
+}))(TextField)
 
-export default Input;
+export default Input

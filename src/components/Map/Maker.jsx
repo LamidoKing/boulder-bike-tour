@@ -1,23 +1,26 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import image from "assets/img/maker.jpg";
-import mapStyles from "styles/components/mapStyles";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/forbid-prop-types */
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import Dialog from "@material-ui/core/Dialog"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogTitle from "@material-ui/core/DialogTitle"
+import image from "assets/img/maker.jpg"
+import mapStyles from "styles/components/mapStyles"
 
 const Makers = (props) => {
-  const classes = mapStyles();
-  const [open, setOpen] = useState(false);
-  const { location } = props;
+  const classes = mapStyles()
+  const [open, setOpen] = useState(false)
+  const { location } = props
 
   const handleClickOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <div>
@@ -60,11 +63,11 @@ const Makers = (props) => {
         onClick={handleClickOpen}
       />
     </div>
-  );
-};
+  )
+}
 
 Makers.propTypes = {
   location: PropTypes.object.isRequired,
-};
+}
 
-export default Makers;
+export default Makers

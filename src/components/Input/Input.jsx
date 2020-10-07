@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes, { number, string } from "prop-types";
-import TextField from "@material-ui/core/TextField";
+import React from "react"
+import PropTypes, { number, string } from "prop-types"
+import TextField from "@material-ui/core/TextField"
 
 const Input = (props) => {
-  const { label, id, value, error, required, handleChange } = props;
+  const { label, id, value, error, required, handleChange } = props
   return (
     <>
       <TextField
@@ -23,8 +23,8 @@ const Input = (props) => {
         onChange={handleChange}
       />
     </>
-  );
-};
+  )
+}
 
 Input.defaultProps = {
   label: "",
@@ -33,7 +33,7 @@ Input.defaultProps = {
   error: false,
   required: false,
   handleChange: () => {},
-};
+}
 
 Input.propTypes = {
   label: PropTypes.string,
@@ -42,5 +42,5 @@ Input.propTypes = {
   error: PropTypes.bool,
   required: PropTypes.bool,
   handleChange: PropTypes.func,
-};
-export default Input;
+}
+export default Input
