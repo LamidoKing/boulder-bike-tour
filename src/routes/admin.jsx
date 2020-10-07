@@ -1,5 +1,6 @@
 import { DirectionsBike, Mail } from "@material-ui/icons"
 import AdminRiders from "adminPage/AdminRiders//AdminRiders"
+import AdminSummision from "adminPage/AdminSummision/AdminSummision"
 
 const AdminRoutes = [
   {
@@ -12,7 +13,7 @@ const AdminRoutes = [
     path: "/admin/submissions",
     name: "Submissions",
     icon: Mail,
-    component: "",
+    component: AdminSummision,
   },
   { redirect: true, path: "/admin", pathTo: "/admin/riders", name: "Home" },
 ]

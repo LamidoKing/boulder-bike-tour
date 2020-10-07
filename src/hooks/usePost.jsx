@@ -2,7 +2,7 @@
 import { useEffect, useRef, useReducer } from "react"
 import { Request } from "utils"
 
-const useFetch = ({ url, body = null, method = "" }) => {
+const useFetch = ({ url, body = null, method = "", authGet = false }) => {
   const cache = useRef({})
 
   const initialState = {
@@ -41,7 +41,7 @@ const useFetch = ({ url, body = null, method = "" }) => {
         dispatch({ type: "FETCHED", payload: data })
       } else {
         try {
-          const data = await Request(url, body, method)
+          const data = await Request(url, body, method, authGet)
           cache.current[url] = data.data
 
           if (cancelRequest) return
@@ -58,7 +58,7 @@ const useFetch = ({ url, body = null, method = "" }) => {
     return () => {
       cancelRequest = true
     }
-  }, [url, body, method, dispatch])
+  }, [url, body, method, dispatch, authGet])
 
   return state
 }

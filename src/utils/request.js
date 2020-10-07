@@ -12,7 +12,7 @@ instance.defaults.headers.common.Authorization = AuthToken.loggedIn()
   ? `Bearer ${AuthToken.getToken()}`
   : null
 
-const fetch = async (url = "", data = null, method = "") => {
+const fetch = async (url = "", data = null, method = "", authGet = false) => {
   if (method === "POST") {
     const response = await instance({
       method: "POST",
@@ -23,8 +23,17 @@ const fetch = async (url = "", data = null, method = "") => {
     return response
   }
 
-  if (method === "GET") {
+  if (method === "GET" && !authGet) {
     const response = await axios({
+      method: "GET",
+      url,
+    })
+
+    return response
+  }
+
+  if (method === "GET" && authGet) {
+    const response = await instance({
       method: "GET",
       url,
     })
