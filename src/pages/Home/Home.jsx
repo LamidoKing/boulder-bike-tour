@@ -15,7 +15,7 @@ const Home = () => {
 
   return (
     <div className={classes.root}>
-      <Parallax image={pImage} />
+      <Parallax image={pImage} filter />
       <Counter days={days} hours={hours} minutes={minutes} seconds={seconds} />
       <ContestInfo />
       <Photos image={pImage} />

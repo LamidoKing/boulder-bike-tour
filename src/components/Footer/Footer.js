@@ -1,16 +1,16 @@
-import React from "react";
+import React from "react"
 import {
   Typography,
   AppBar,
   CssBaseline,
   Toolbar,
   Hidden,
-} from "@material-ui/core";
-import Links from "components/Header/HeaderLinks";
-import footerStyles from "styles/components/footerStyles";
+} from "@material-ui/core"
+import Links from "components/Header/HeaderLinks"
+import footerStyles from "styles/components/footerStyles"
 
 const Footer = () => {
-  const classes = footerStyles();
+  const classes = footerStyles()
 
   return (
     <>
@@ -27,6 +27,6 @@ const Footer = () => {
         </Toolbar>
       </AppBar>
     </>
-  );
-};
-export default Footer;
+  )
+}
+export default Footer

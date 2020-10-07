@@ -5,6 +5,7 @@ import GridList from "@material-ui/core/GridList"
 import GridListTile from "@material-ui/core/GridListTile"
 import ButtonBase from "@material-ui/core/ButtonBase"
 import Typography from "@material-ui/core/Typography"
+import CircularProgress from "@material-ui/core/CircularProgress"
 import { useFetch } from "hooks"
 import { Urls } from "utils"
 import homePhotoStyles from "styles/pages/home/sections/photo"
@@ -31,8 +32,14 @@ const Photos = (props) => {
   ]
   return (
     <>
-      {status === "fetched" && (
-        <div className={classes.root}>
+      <div className={classes.title}>
+        <Typography component="span" variant="h6">
+          EVENT PHOTOS
+        </Typography>
+      </div>
+
+      <div className={classes.root}>
+        {status === "fetched" ? (
           <GridList cellHeight={200} spacing={1} className={classes.gridList}>
             {data.photos.photo.map((photo, index) => (
               <GridListTile
@@ -76,8 +83,10 @@ const Photos = (props) => {
               </span>
             </ButtonBase>
           </GridList>
-        </div>
-      )}
+        ) : (
+          <CircularProgress color="secondary" />
+        )}
+      </div>
     </>
   )
 }

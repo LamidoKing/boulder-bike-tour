@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Redirect, Route, useHistory } from "react-router-dom";
-import classnames from "classnames";
+import React from "react"
+import { Switch, Redirect, Route, useHistory } from "react-router-dom"
+import classnames from "classnames"
 import {
   useTheme,
   Button,
@@ -15,36 +15,36 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
-import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons";
-import AddRider from "adminPage/AdminRiders/AddEditRider";
-import dashBoardRoutes from "routes/admin";
-import { AuthToken } from "utils";
-import drawerStyles from "styles/components/drawer";
+} from "@material-ui/core"
+import { Menu, ChevronLeft, ChevronRight } from "@material-ui/icons"
+import AddRider from "adminPage/AdminRiders/AddEditRider"
+import dashBoardRoutes from "routes/admin"
+import { AuthToken } from "utils"
+import drawerStyles from "styles/components/drawer"
 
 const switchRoutes = (
   <Switch>
     {dashBoardRoutes.map((prop) => {
       if (prop.redirect) {
-        return <Redirect from={prop.path} to={prop.pathTo} key={prop.path} />;
+        return <Redirect from={prop.path} to={prop.pathTo} key={prop.path} />
       }
 
       return (
         <Route path={prop.path} component={prop.component} key={prop.path} />
-      );
+      )
     })}
   </Switch>
-);
+)
 
 const MiniDrawer = () => {
-  const history = useHistory();
-  const classes = drawerStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const history = useHistory()
+  const classes = drawerStyles()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
 
   const leftPanelLinks = dashBoardRoutes.map((prop) => {
     if (prop.redirect) {
-      return <Redirect from={prop.path} to={prop.pathTo} key={prop.path} />;
+      return <Redirect from={prop.path} to={prop.pathTo} key={prop.path} />
     }
     return (
       <ListItem
@@ -58,21 +58,21 @@ const MiniDrawer = () => {
         </ListItemIcon>
         <ListItemText primary={prop.name} />
       </ListItem>
-    );
-  });
+    )
+  })
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleLogout = () => {
-    AuthToken.logout();
-    history.push("/admin");
-  };
+    AuthToken.logout()
+    history.push("/admin")
+  }
 
   return (
     <div className={classes.root}>
@@ -135,7 +135,7 @@ const MiniDrawer = () => {
         {switchRoutes}
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default MiniDrawer;
+export default MiniDrawer

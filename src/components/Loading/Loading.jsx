@@ -1,7 +1,8 @@
-import React from "react";
-import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react"
+import PropTypes from "prop-types"
+import Backdrop from "@material-ui/core/Backdrop"
+import CircularProgress from "@material-ui/core/CircularProgress"
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -14,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "30px",
     },
   },
-}));
+}))
 
 const Loading = (props) => {
-  const classes = useStyles();
-  const { status, top } = props;
-  const mTop = top ? classes.topMargin : "";
+  const classes = useStyles()
+  const { status, top } = props
+  const mTop = top ? classes.topMargin : ""
 
   return (
     <div>
@@ -30,7 +31,17 @@ const Loading = (props) => {
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>
-  );
-};
+  )
+}
 
-export default Loading;
+Loading.defaultProps = {
+  status: "",
+  top: false,
+}
+
+Loading.propTypes = {
+  status: PropTypes.string,
+  top: PropTypes.bool,
+}
+
+export default Loading

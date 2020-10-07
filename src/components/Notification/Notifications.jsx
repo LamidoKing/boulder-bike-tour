@@ -1,15 +1,17 @@
-import React from "react";
-import Snackbar from "@material-ui/core/Snackbar";
-import Slide from "@material-ui/core/Slide";
-import notificationStyles from "styles/components/notification";
+/* eslint-disable react/jsx-props-no-spreading */
+import React from "react"
+import PropTypes from "prop-types"
+import Snackbar from "@material-ui/core/Snackbar"
+import Slide from "@material-ui/core/Slide"
+import notificationStyles from "styles/components/notification"
 
 function TransitionDown(props) {
-  return <Slide {...props} direction="down" />;
+  return <Slide {...props} direction="down" />
 }
 
 const Notifications = (props) => {
-  const classes = notificationStyles();
-  const { open, message, handleCloseNotification } = props;
+  const classes = notificationStyles()
+  const { open, message, handleCloseNotification } = props
 
   return (
     <div>
@@ -28,7 +30,18 @@ const Notifications = (props) => {
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Notifications;
+Notifications.defaultProps = {
+  open: false,
+  message: "",
+  handleCloseNotification: () => {},
+}
+
+Notifications.propTypes = {
+  open: PropTypes.bool,
+  message: PropTypes.string,
+  handleCloseNotification: PropTypes.func,
+}
+export default Notifications

@@ -11,7 +11,7 @@ import {
   IconButton,
   InputAdornment,
 } from "@material-ui/core"
-import Input from "components/CustomTextField/CustomTextField"
+import Input from "components/Input/LoginInput"
 import { DirectionsBike, Visibility, VisibilityOff } from "@material-ui/icons"
 import { Urls, AuthToken } from "utils"
 import Loading from "components/Loading/Loading"

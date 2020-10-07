@@ -1,23 +1,6 @@
 import { makeStyles } from "@material-ui/core"
 import { paper } from "styles/general"
-// const main = {
-//   background: "white",
-//   position: "relative",
-//   zIndex: "3",
-// }
 
-// const mainRaised = {
-//   "@media (max-width: 576px)": {
-//     marginTop: "-30px",
-//   },
-//   "@media (max-width: 830px)": {
-//     marginLeft: "10px",
-//     marginRight: "10px",
-//   },
-//   margin: "-60px 30px 0px",
-//   borderRadius: "6px",
-//   boxShadow: `0 16px 24px 2px black`,
-// }
 const counterStyles = makeStyles(() => ({
   paper1: {
     ...paper,
@@ -69,7 +52,9 @@ const counterStyles = makeStyles(() => ({
 
   icon: {
     paddingLeft: "20px",
+    marginTop: "40px",
     color: "white",
+    fontSize: 50,
   },
 }))
 
