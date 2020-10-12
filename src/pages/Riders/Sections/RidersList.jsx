@@ -1,12 +1,10 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/no-array-index-key */
 import React from "react"
 import PropTypes from "prop-types"
 import Skeleton from "@material-ui/lab/Skeleton"
 import { Box, Paper, Typography } from "@material-ui/core"
 import GridContainer from "components/Grid/GridContainer"
 import GridItem from "components/Grid/GridItem"
-import image from "assets/img/maker.jpg"
+import image from "assets/img/avatar.webp"
 
 const RidersList = (props) => {
   const { riders, status, classes } = props
@@ -23,7 +21,11 @@ const RidersList = (props) => {
                     color="primary"
                   >
                     <div className={classes.align}>
-                      <img src={image} alt="" className={classes.img} />
+                      <img
+                        src={rider.photo || image}
+                        alt=""
+                        className={classes.img}
+                      />
                     </div>
                     <Typography variant="h6" className={classes.text}>
                       {`Name: ${rider.first_name} ${rider.last_name}`}
@@ -40,6 +42,7 @@ const RidersList = (props) => {
             })
           : Array.from(new Array(20)).map((i, index) => {
               return (
+                // eslint-disable-next-line react/no-array-index-key
                 <GridItem xs={12} sm={6} md={4} lg={4} key={index}>
                   <Box>
                     <Skeleton animation="wave" height={200} />
@@ -53,9 +56,9 @@ const RidersList = (props) => {
 }
 
 RidersList.propTypes = {
-  riders: PropTypes.array.isRequired,
+  riders: PropTypes.oneOfType([PropTypes.array]).isRequired,
   status: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.oneOfType([PropTypes.object]).isRequired,
 }
 
 export default RidersList

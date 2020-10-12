@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Dialog from "components/Dialog/Dialog"
@@ -42,6 +39,7 @@ const PhotoList = (props) => {
                       )
                     }
                     className={classes.image}
+                    role="presentation"
                   />
                 </GridListTile>
               )
@@ -76,7 +74,7 @@ const PhotoList = (props) => {
 }
 
 PhotoList.propTypes = {
-  photos: PropTypes.array.isRequired,
+  photos: PropTypes.oneOfType([PropTypes.array]).isRequired,
   status: PropTypes.string.isRequired,
   moreFetchStatus: PropTypes.string.isRequired,
 }

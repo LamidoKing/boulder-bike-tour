@@ -15,6 +15,15 @@ const theme = createMuiTheme({
     white: grey[50],
   },
   type: "dark",
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "*::-webkit-scrollbar": {
+          display: "none",
+        },
+      },
+    },
+  },
 })
 
 export default theme

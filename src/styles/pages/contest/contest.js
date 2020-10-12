@@ -1,15 +1,16 @@
 import { makeStyles } from "@material-ui/core"
 import { container } from "styles/general"
-import image from "assets/img/contest.jpg"
+import image from "assets/img/contest.webp"
 
 const contestStyle = makeStyles(() => ({
   container,
   root: {
     position: "relative",
     background: `url(${image})`,
-    backgroundPosition: "center",
     backgroundSize: "cover",
-    minHeight: "100vh",
+    backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
   },
 }))
 

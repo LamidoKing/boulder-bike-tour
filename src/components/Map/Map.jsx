@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
 import GoogleMapReact from "google-map-react"
@@ -13,7 +12,7 @@ const Map = (props) => {
       <GoogleMapReact
         bootstrapURLKeys={{ key: `${process.env.REACT_APP_MAP_KEY}` }}
         defaultCenter={center}
-        defaultZoom={13}
+        defaultZoom={12.5}
       >
         {locations.map((location) => {
           return (
@@ -32,7 +31,7 @@ const Map = (props) => {
 }
 
 Map.propTypes = {
-  locations: PropTypes.array.isRequired,
-  center: PropTypes.object.isRequired,
+  locations: PropTypes.oneOfType([PropTypes.array]).isRequired,
+  center: PropTypes.oneOfType([PropTypes.object]).isRequired,
 }
 export default Map

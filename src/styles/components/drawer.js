@@ -1,3 +1,4 @@
+import { red } from "@material-ui/core/colors"
 import { makeStyles } from "@material-ui/core/styles"
 
 const drawerWidth = 240
@@ -57,14 +58,14 @@ const drawerStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
-    background: "red",
+    background: red[500],
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerClose: {
-    background: "red",
+    background: red[500],
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,

@@ -1,17 +1,17 @@
 import { withStyles } from "@material-ui/styles"
 import TextField from "@material-ui/core/TextField"
 
-const Input = withStyles(({ filed, hover, focused }) => ({
+const Input = withStyles(() => ({
   root: {
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
-        borderColor: filed || "black",
+        borderColor: "black",
       },
       "&:hover fieldset": {
-        borderColor: hover || "black",
+        borderColor: "black",
       },
       "&.Mui-focused fieldset": {
-        borderColor: focused || "black",
+        borderColor: "black",
       },
     },
   },

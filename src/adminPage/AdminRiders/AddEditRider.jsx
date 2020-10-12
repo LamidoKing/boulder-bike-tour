@@ -1,5 +1,4 @@
-/* eslint-disable react/forbid-prop-types */
-import React, { useEffect, useState } from "react"
+import React, { createRef, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Fab from "@material-ui/core/Fab"
 import AddIcon from "@material-ui/icons/Add"
@@ -9,6 +8,7 @@ import Dialog from "components/Dialog/Dialog"
 import { useFetch } from "hooks"
 import { Urls } from "utils"
 import { useHistory } from "react-router-dom"
+import defaultAvatar from "assets/img/avatar.webp"
 import Form from "./RiderForm"
 
 const AddEditRider = (props) => {
@@ -18,6 +18,10 @@ const AddEditRider = (props) => {
   const [body, setbBody] = useState()
   const [riderBody, setRiderBody] = useState()
   const [url, setUrl] = useState()
+  const [file, setFile] = useState(null)
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(defaultAvatar)
+
+  const fileInput = createRef()
 
   const addRider = useFetch({
     url: `${Urls.bbtApiUrl}/riders`,
@@ -68,11 +72,31 @@ const AddEditRider = (props) => {
     setOpen(false)
   }
 
+  const handleImageClick = () => {
+    fileInput.current.click()
+  }
+
+  const handleRemoveUmage = () => {
+    setFile(null)
+    setImagePreviewUrl(defaultAvatar)
+    fileInput.current.value = null
+  }
+
   const verifyLength = (value, length) => {
     if (value.length >= length) {
       return true
     }
     return false
+  }
+
+  const handleImageChange = (e) => {
+    const reader = new FileReader()
+    const uploadedFile = e.target.files[0]
+    reader.onloadend = () => {
+      setFile(uploadedFile)
+      setImagePreviewUrl(reader.result)
+    }
+    reader.readAsDataURL(uploadedFile)
   }
 
   const handleChange = (prop) => (event) => {
@@ -118,13 +142,31 @@ const AddEditRider = (props) => {
       values.longitude
     ) {
       if (type === "edit" && rider.id && editRider.status === "idle") {
-        setRiderBody(values)
+        const formdata = new FormData()
+
+        if (file) formdata.append("rider[photo]", file)
+
+        const valuesKeys = Object.keys(values)
+
+        valuesKeys.map((key) => {
+          return formdata.append(`rider[${key}]`, values[key])
+        })
+
+        setRiderBody(formdata)
         setUrl(`${Urls.bbtApiUrl}/riders/${rider.id}`)
         return
       }
 
       if (type === "add" && addRider.status === "idle") {
-        setbBody(values)
+        const formdata = new FormData()
+        if (file) formdata.append("rider[photo]", file)
+
+        const valuesKeys = Object.keys(values)
+
+        valuesKeys.map((key) => {
+          return formdata.append(`rider[${key}]`, values[key])
+        })
+        setbBody(formdata)
       }
     }
   }
@@ -142,6 +184,7 @@ const AddEditRider = (props) => {
       history.push("/admin")
     }
   }, [editRider.status, addRider.status, history])
+
   return (
     <>
       <Tooltip
@@ -168,6 +211,12 @@ const AddEditRider = (props) => {
             handleChange={handleChange}
             handleSummit={handleSummit}
             type={type}
+            handleImageChange={handleImageChange}
+            fileInput={fileInput}
+            handleImageClick={handleImageClick}
+            handleRemoveImage={handleRemoveUmage}
+            imagePreviewUrl={imagePreviewUrl}
+            file={file}
           />
         }
       />
@@ -181,6 +230,6 @@ AddEditRider.defaultProps = {
 }
 AddEditRider.propTypes = {
   type: PropTypes.string,
-  rider: PropTypes.object,
+  rider: PropTypes.oneOfType([PropTypes.object]),
 }
 export default AddEditRider

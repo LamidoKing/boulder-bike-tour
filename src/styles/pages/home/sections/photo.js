@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core"
+import { red } from "@material-ui/core/colors"
 import { container } from "styles/general"
 
 const HomePhotosStyle = makeStyles((theme) => ({
@@ -9,7 +10,7 @@ const HomePhotosStyle = makeStyles((theme) => ({
     flexWrap: "wrap",
     justifyContent: "space-around",
     overflow: "hidden",
-    backgroundColor: "red",
+    backgroundColor: red[500],
     paddingBottom: "5px",
   },
   image: {

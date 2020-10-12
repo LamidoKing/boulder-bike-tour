@@ -1,22 +1,18 @@
-import React, { useState } from "react"
+import React from "react"
 import Parallax from "components/Parallax/Parallax"
-import pImage from "assets/img/home.jpg"
+import pImage from "assets/img/home.webp"
 import homeStyle from "styles/pages//home/homeStyles"
-import { useTimer } from "hooks"
 import Counter from "./Sections/Counter"
 import ContestInfo from "./Sections/ContestInfo"
 import Photos from "./Sections/Photos"
 
 const Home = () => {
   const classes = homeStyle()
-  const [date] = useState("10-22-2020, 4:57 pm")
-
-  const { days, hours, minutes, seconds } = useTimer(date)
 
   return (
     <div className={classes.root}>
       <Parallax image={pImage} filter />
-      <Counter days={days} hours={hours} minutes={minutes} seconds={seconds} />
+      <Counter />
       <ContestInfo />
       <Photos image={pImage} />
     </div>

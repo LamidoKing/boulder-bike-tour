@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React from "react"
 import PropTypes from "prop-types"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
@@ -34,6 +33,11 @@ const ScrollTop = (props) => {
       </div>
     </Zoom>
   )
+}
+
+ScrollTop.defaultProps = {
+  children: <div />,
+  window: () => {},
 }
 
 ScrollTop.propTypes = {

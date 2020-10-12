@@ -1,20 +1,24 @@
 import { makeStyles } from "@material-ui/core"
-import { container, paper } from "styles/general"
-import image from "assets/img/riders.jpg"
+import { container } from "styles/general"
+import image from "assets/img/rider1.webp"
 
 const ridersStyle = makeStyles(() => ({
   container,
   paper1: {
-    ...paper,
-    margin: "60px 0px",
+    opacity: 0.99,
+    background: "#f44336",
+    position: "relative",
+    zIndex: "3",
+    margin: "70px 0px",
     borderRadius: "40px",
   },
   root: {
     position: "relative",
     background: `url(${image})`,
-    backgroundPosition: "center",
     backgroundSize: "cover",
-    minHeight: "100vh",
+    backgroundAttachment: "fixed",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
     "&:before": {
       background: "rgba(0, 0, 0, 0.5)",
     },
@@ -29,8 +33,8 @@ const ridersStyle = makeStyles(() => ({
     },
   },
   img: {
-    width: "100px",
-    height: "100px",
+    width: "150px",
+    height: "150px",
     borderRadius: "50% !important",
     boxShadow: "0 5px 15px -8px white",
     transform: "translate3d(0, -40%, 0)",
