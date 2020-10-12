@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import Fab from "@material-ui/core/Fab"
@@ -64,6 +63,6 @@ DeleteRider.defaultProps = {
 }
 
 DeleteRider.propTypes = {
-  rider: PropTypes.object,
+  rider: PropTypes.oneOfType([PropTypes.object]),
 }
 export default DeleteRider

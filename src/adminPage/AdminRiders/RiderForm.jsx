@@ -1,40 +1,68 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
 import { Button, Typography } from "@material-ui/core"
 import Input from "components/Input/Input"
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "200px",
-    },
-  },
-  container: {
-    padding: "30px 50px 10px 50px",
-  },
-  text: {
-    textAlign: "center",
-  },
-  button: {
-    padding: "0px 20px",
-  },
-}))
+import riderFormStyle from "styles/adminPage/adminRiders/riderFormStyle"
 
 const RiderForm = (props) => {
-  const { values, errors, type, handleSummit, handleChange } = props
-  const classes = useStyles()
+  const {
+    values,
+    errors,
+    type,
+    handleSummit,
+    handleChange,
+    file,
+    fileInput,
+    imagePreviewUrl,
+    handleImageClick,
+    handleRemoveImage,
+    handleImageChange,
+  } = props
+  const classes = riderFormStyle()
+
   return (
     <div className={classes.container}>
       <Typography variant="h6" color="secondary" className={classes.text}>
         {type === "add" ? "Add New Rider" : "Edit Rider"}
       </Typography>
       <form className={classes.root} noValidate autoComplete="off">
+        <div className={classes.align}>
+          <img
+            src={imagePreviewUrl}
+            className={classes.img}
+            alt="..."
+            onClick={() => handleImageClick()}
+            role="presentation"
+          />
+          <div>
+            {file === null ? (
+              <Button
+                color="secondary"
+                size="small"
+                onClick={() => handleImageClick()}
+              >
+                Add Photo
+              </Button>
+            ) : (
+              <Button
+                color="secondary"
+                size="small"
+                onClick={() => handleRemoveImage()}
+              >
+                Remove
+              </Button>
+            )}
+          </div>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            ref={fileInput}
+            style={{ display: "none" }}
+          />
+        </div>
         <Input
           label="First Name"
-          id="text"
+          id="first name"
           value={values.first_name}
           error={errors.first_name_error}
           handleChange={handleChange("first_name")}
@@ -42,7 +70,7 @@ const RiderForm = (props) => {
         <br />
         <Input
           label="Last Name"
-          id="text"
+          id="last name"
           value={values.last_name}
           error={errors.last_name_error}
           handleChange={handleChange("last_name")}
@@ -50,7 +78,7 @@ const RiderForm = (props) => {
         <br />
         <Input
           label="State of Origin"
-          id="text"
+          id="state of origin"
           value={values.state_of_origin}
           error={errors.state_of_origin}
           handleChange={handleChange("state_of_origin")}
@@ -58,7 +86,7 @@ const RiderForm = (props) => {
         <br />
         <Input
           label="City of Origin"
-          id="text"
+          id="city of origin"
           value={values.city_of_origin}
           error={errors.city_of_origin}
           handleChange={handleChange("city_of_origin")}
@@ -66,7 +94,7 @@ const RiderForm = (props) => {
         <br />
         <Input
           label="Latitude"
-          id="text"
+          id="latitude"
           value={values.latitude}
           error={errors.latitude_error}
           handleChange={handleChange("latitude")}
@@ -74,7 +102,7 @@ const RiderForm = (props) => {
         <br />
         <Input
           label="Longitude"
-          id="text"
+          id="longitude"
           value={values.longitude}
           error={errors.longitude_error}
           handleChange={handleChange("longitude")}
@@ -90,11 +118,21 @@ const RiderForm = (props) => {
   )
 }
 
+RiderForm.defaultProps = {
+  file: null,
+}
+
 RiderForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  values: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  errors: PropTypes.oneOfType([PropTypes.object]).isRequired,
   handleSummit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
+  file: PropTypes.oneOfType([PropTypes.object]),
+  fileInput: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  imagePreviewUrl: PropTypes.string.isRequired,
+  handleImageClick: PropTypes.func.isRequired,
+  handleRemoveImage: PropTypes.func.isRequired,
+  handleImageChange: PropTypes.func.isRequired,
 }
 export default RiderForm

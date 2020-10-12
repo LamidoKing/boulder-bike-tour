@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core"
 const formStyles = makeStyles(() => ({
   paper: {
     background: "#424242",
-    marginTop: "50px",
+    marginTop: "40px",
+    marginBottom: "40px",
     padding: "30px 50px 10px 50px",
   },
   text: {

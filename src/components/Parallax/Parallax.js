@@ -1,20 +1,27 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import classNames from "classnames"
 import PropTypes from "prop-types"
-import { makeStyles } from "@material-ui/core/styles"
-import styles from "styles/components/parallaxStyle"
+import parallaxStyle from "styles/components/parallaxStyle"
 
-const useStyles = makeStyles(styles)
+const Parallax = (props) => {
+  const classes = parallaxStyle()
+  const { filter, className, children, style, image, small } = props
+  const parallaxClasses = classNames({
+    [classes.parallax]: true,
+    [classes.filter]: filter,
+    [classes.small]: small,
+    [className]: className !== undefined,
+  })
 
-export default function Parallax(props) {
   let windowScrollTop
+
   if (window.innerWidth >= 768) {
     windowScrollTop = window.pageYOffset / 3
   } else {
     windowScrollTop = 0
   }
 
-  const [transform, setTransform] = React.useState(
+  const [transform, setTransform] = useState(
     `translate3d(0,${windowScrollTop}px,0)`
   )
 
@@ -23,7 +30,7 @@ export default function Parallax(props) {
     setTransform(`translate3d(0,${windowScrollTop}px,0)`)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (window.innerWidth >= 768) {
       window.addEventListener("scroll", resetTransform)
     }
@@ -34,14 +41,6 @@ export default function Parallax(props) {
     }
   })
 
-  const { filter, className, children, style, image, small } = props
-  const classes = useStyles()
-  const parallaxClasses = classNames({
-    [classes.parallax]: true,
-    [classes.filter]: filter,
-    [classes.small]: small,
-    [className]: className !== undefined,
-  })
   return (
     <div
       className={parallaxClasses}
@@ -73,3 +72,5 @@ Parallax.propTypes = {
   image: PropTypes.string,
   small: PropTypes.bool,
 }
+
+export default Parallax

@@ -18,6 +18,7 @@ const Photos = (props) => {
     url: `${Urls.flickrApi}&api_key=${process.env.REACT_APP_API_KEY}&tags=bikerace&per_page=10&page=10&format=json&nojsoncallback=1`,
     method: "GET",
   })
+
   const featured = [
     true,
     false,
@@ -39,7 +40,7 @@ const Photos = (props) => {
       </div>
 
       <div className={classes.root}>
-        {status === "fetched" ? (
+        {status === "fetched" && data.photos ? (
           <GridList cellHeight={200} spacing={1} className={classes.gridList}>
             {data.photos.photo.map((photo, index) => (
               <GridListTile

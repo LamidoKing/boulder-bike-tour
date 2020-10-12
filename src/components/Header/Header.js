@@ -1,7 +1,4 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/jsx-props-no-spreading */
 import React from "react"
-import PropTypes from "prop-types"
 import AppBar from "@material-ui/core/AppBar"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -18,10 +15,9 @@ import headerStyle from "styles/components/headerStyle"
 import ScrollTop from "./ScrollTop"
 import ElevationScroll from "./ElevationScroll"
 
-const Header = (props) => {
+const Header = () => {
   const classes = headerStyle()
   const [state, setState] = React.useState({ left: false })
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -48,7 +44,7 @@ const Header = (props) => {
   return (
     <>
       <CssBaseline />
-      <ElevationScroll {...props}>
+      <ElevationScroll>
         <AppBar>
           <Toolbar className={classes.container}>
             <IconButton
@@ -91,17 +87,13 @@ const Header = (props) => {
         </AppBar>
       </ElevationScroll>
       <Toolbar id="back-to-top-anchor" />
-      <ScrollTop {...props}>
+      <ScrollTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
     </>
   )
-}
-
-Header.propTypes = {
-  children: PropTypes.element,
 }
 
 export default Header

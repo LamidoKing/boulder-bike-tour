@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react"
 import PropTypes from "prop-types"
 import {
@@ -41,7 +40,7 @@ const Form = (props) => {
               value={values.first_name}
               inputProps={{ style: inputProps }}
               variant="outlined"
-              id="text"
+              id="first name"
               error={errors.first_name_error}
               label={errors.first_name_error ? "required" : ""}
               required={errors.first_name_error}
@@ -62,7 +61,7 @@ const Form = (props) => {
               value={values.last_name}
               inputProps={{ style: inputProps }}
               variant="outlined"
-              id="text"
+              id="last name"
               error={errors.last_name_error}
               label={errors.last_name_error ? "required" : ""}
               required={errors.last_name_error}
@@ -105,7 +104,7 @@ const Form = (props) => {
               value={values.slogan}
               inputProps={{ style: inputProps }}
               variant="outlined"
-              id="text"
+              id="slogan"
               error={errors.slogan_error}
               label={errors.slogan_error ? "required" : ""}
               required={errors.slogan_error}
@@ -140,8 +139,8 @@ const Form = (props) => {
 
 Form.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  values: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  errors: PropTypes.oneOfType([PropTypes.object]).isRequired,
   disableButton: PropTypes.bool.isRequired,
   handleSummit: PropTypes.func.isRequired,
 }

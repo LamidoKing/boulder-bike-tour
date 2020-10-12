@@ -1,12 +1,9 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/forbid-prop-types */
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
-import image from "assets/img/maker.jpg"
+import image from "assets/img/avatar.webp"
 import mapStyles from "styles/components/mapStyles"
 
 const Makers = (props) => {
@@ -21,7 +18,6 @@ const Makers = (props) => {
   const handleClose = () => {
     setOpen(false)
   }
-
   return (
     <div>
       <Dialog
@@ -37,7 +33,11 @@ const Makers = (props) => {
         }}
       >
         <div className={classes.align}>
-          <img src={image} alt="" className={classes.dialogImg} />
+          <img
+            src={location.photo || image}
+            alt=""
+            className={classes.dialogImg}
+          />
         </div>
 
         <DialogContent>
@@ -57,17 +57,18 @@ const Makers = (props) => {
       </Dialog>
 
       <img
-        src={image}
+        src={location.photo || image}
         alt=""
         className={classes.marker}
         onClick={handleClickOpen}
+        role="presentation"
       />
     </div>
   )
 }
 
 Makers.propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.oneOfType([PropTypes.object]).isRequired,
 }
 
 export default Makers

@@ -1,12 +1,14 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useState } from "react"
+import { useTimer } from "hooks"
 import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike"
 import { Typography, Paper, CircularProgress, Box } from "@material-ui/core"
 import counterStyles from "styles/pages/home/sections/counterStyles"
 
-const Counter = (props) => {
-  const { days, hours, minutes, seconds } = props
+const Counter = () => {
   const classes = counterStyles()
+  const [date] = useState("10-22-2020, 4:57 pm")
+
+  const { days, hours, minutes, seconds } = useTimer(date)
 
   return (
     <div className={classes.root}>
@@ -105,13 +107,6 @@ const Counter = (props) => {
       </Paper>
     </div>
   )
-}
-
-Counter.propTypes = {
-  days: PropTypes.number.isRequired,
-  hours: PropTypes.number.isRequired,
-  minutes: PropTypes.number.isRequired,
-  seconds: PropTypes.number.isRequired,
 }
 
 export default Counter
