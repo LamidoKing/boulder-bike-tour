@@ -3,7 +3,7 @@ import PropTypes, { number, string } from "prop-types"
 import TextField from "@material-ui/core/TextField"
 
 const Input = (props) => {
-  const { label, id, value, error, required, handleChange } = props
+  const { label, id, value, error, type, required, handleChange } = props
   return (
     <>
       <TextField
@@ -18,6 +18,7 @@ const Input = (props) => {
         InputLabelProps={{
           style: { color: "yellow" },
         }}
+        type={type}
         fullWidth
         color="secondary"
         onChange={handleChange}
@@ -30,6 +31,7 @@ Input.defaultProps = {
   label: "",
   id: "",
   value: "",
+  type: "string",
   error: false,
   required: false,
   handleChange: () => {},
@@ -40,6 +42,7 @@ Input.propTypes = {
   id: PropTypes.string,
   value: PropTypes.oneOfType([string, number]),
   error: PropTypes.bool,
+  type: PropTypes.oneOfType([string, number]),
   required: PropTypes.bool,
   handleChange: PropTypes.func,
 }

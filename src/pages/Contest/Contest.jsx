@@ -3,7 +3,7 @@ import GridContainer from "components/Grid/GridContainer"
 import GridItem from "components/Grid/GridItem"
 import Notification from "components/Notification/Notifications"
 import contestStyle from "styles/pages/contest/contest"
-import { useFetch } from "hooks"
+import { useFetch, useForm } from "hooks"
 import { Urls } from "utils"
 import Loading from "components/Loading/Loading"
 import { useHistory } from "react-router-dom"
@@ -16,108 +16,32 @@ const Contest = () => {
   const classes = contestStyle()
   const [open, setOpen] = useState(false)
   const [succesDiaog, setSuccesDiaog] = useState(false)
-  const [disableButton, setDisableButton] = useState(true)
   const [message, setMessage] = useState("")
-  const [body, setBody] = useState()
-  const [values, setValues] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    slogan: "",
-  })
 
-  const [errors, setErrors] = useState({
-    first_name_error: false,
-    last_name_error: false,
-    email_error: false,
-    slogan_error: false,
-  })
+  const initialState = {
+    first_name: undefined,
+    last_name: undefined,
+    email: undefined,
+    slogan: undefined,
+  }
+
+  const {
+    values,
+    handleChange,
+    toggleSummitButton,
+    body,
+    handleSummit,
+  } = useForm({ initialState })
+
   const { status, error } = useFetch({
     url: `${Urls.bbtApiUrl}/submissions`,
     body,
     method: "POST",
   })
 
-  const verifyEmail = (value) => {
-    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    if (emailRex.test(value)) {
-      return true
-    }
-    return false
-  }
-
-  const verifyLength = (value, length) => {
-    if (value.length >= length) {
-      return true
-    }
-    return false
-  }
-
-  const handleChange = (prop) => (event) => {
-    const { value } = event.target
-
-    if (prop === "first_name" || prop === "last_name") {
-      setValues({ ...values, [prop]: value })
-      setErrors({
-        ...errors,
-        [`${prop}_error`]: !verifyLength(value, 1),
-      })
-    }
-
-    if (prop === "email") {
-      setValues({ ...values, [prop]: value })
-      setErrors({
-        ...errors,
-        [`${prop}_error`]: !verifyEmail(value),
-      })
-    }
-
-    if (prop === "slogan" && value.length <= 50) {
-      setValues({ ...values, [prop]: value })
-      setErrors({
-        ...errors,
-        [`${prop}_error`]: !verifyLength(value, 1),
-      })
-    }
-  }
-
-  const handleSummit = () => {
-    if (
-      values.first_name &&
-      values.last_name &&
-      values.email &&
-      values.slogan
-    ) {
-      setBody(values)
-      return ""
-    }
-    setBody()
-    return ""
-  }
-
   const handleCloseNotification = () => {
     setOpen(false)
   }
-
-  useEffect(() => {
-    const valuesKeys = Object.keys(values)
-
-    valuesKeys.map((key) => {
-      if (!values[key]) {
-        setDisableButton(true)
-      }
-      return ""
-    })
-
-    if (
-      values.first_name &&
-      values.last_name &&
-      values.email &&
-      values.slogan
-    ) {
-      setDisableButton(false)
-    }
-  }, [values])
 
   const handleCloseDialog = () => {
     setSuccesDiaog(false)
@@ -180,9 +104,8 @@ const Contest = () => {
             <Form
               handleChange={handleChange}
               values={values}
-              errors={errors}
               status={status}
-              disableButton={disableButton}
+              disableButton={toggleSummitButton}
               handleSummit={handleSummit}
             />
           </GridItem>
