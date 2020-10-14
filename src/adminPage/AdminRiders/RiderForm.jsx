@@ -7,7 +7,6 @@ import riderFormStyle from "styles/adminPage/adminRiders/riderFormStyle"
 const RiderForm = (props) => {
   const {
     values,
-    errors,
     type,
     handleSummit,
     handleChange,
@@ -63,32 +62,32 @@ const RiderForm = (props) => {
         <Input
           label="First Name"
           id="first name"
-          value={values.first_name}
-          error={errors.first_name_error}
+          value={values.first_name || ""}
+          error={values.first_name === ""}
           handleChange={handleChange("first_name")}
         />
         <br />
         <Input
           label="Last Name"
           id="last name"
-          value={values.last_name}
-          error={errors.last_name_error}
+          value={values.last_name || ""}
+          error={values.last_name === ""}
           handleChange={handleChange("last_name")}
         />
         <br />
         <Input
           label="State of Origin"
           id="state of origin"
-          value={values.state_of_origin}
-          error={errors.state_of_origin}
+          value={values.state_of_origin || ""}
+          error={values.state_of_origin === ""}
           handleChange={handleChange("state_of_origin")}
         />
         <br />
         <Input
           label="City of Origin"
           id="city of origin"
-          value={values.city_of_origin}
-          error={errors.city_of_origin}
+          value={values.city_of_origin || ""}
+          error={values.city_of_origin === ""}
           handleChange={handleChange("city_of_origin")}
         />
         <br />
@@ -96,7 +95,8 @@ const RiderForm = (props) => {
           label="Latitude"
           id="latitude"
           value={values.latitude}
-          error={errors.latitude_error}
+          error={values.latitude === ""}
+          type="number"
           handleChange={handleChange("latitude")}
         />
         <br />
@@ -104,7 +104,8 @@ const RiderForm = (props) => {
           label="Longitude"
           id="longitude"
           value={values.longitude}
-          error={errors.longitude_error}
+          error={values.longitude === ""}
+          type="number"
           handleChange={handleChange("longitude")}
         />
         <br />
@@ -125,7 +126,6 @@ RiderForm.defaultProps = {
 RiderForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  errors: PropTypes.oneOfType([PropTypes.object]).isRequired,
   handleSummit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   file: PropTypes.oneOfType([PropTypes.object]),

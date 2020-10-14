@@ -5,7 +5,7 @@ import AddIcon from "@material-ui/icons/Add"
 import EditIcon from "@material-ui/icons/Edit"
 import Tooltip from "@material-ui/core/Tooltip"
 import Dialog from "components/Dialog/Dialog"
-import { useFetch } from "hooks"
+import { useFetch, useForm } from "hooks"
 import { Urls } from "utils"
 import { useHistory } from "react-router-dom"
 import defaultAvatar from "assets/img/avatar.webp"
@@ -43,26 +43,17 @@ const AddEditRider = (props) => {
     latitude: rider.latitude,
     longitude: rider.longitude,
   }
-  const iniatialState = rider
+  const initialState = rider
     ? editRiderdata
     : {
-        first_name: "",
-        last_name: "",
-        state_of_origin: "",
-        city_of_origin: "",
-        latitude: "",
-        longitude: "",
+        first_name: undefined,
+        last_name: undefined,
+        state_of_origin: undefined,
+        city_of_origin: undefined,
+        latitude: undefined,
+        longitude: undefined,
       }
-  const [values, setValues] = useState(iniatialState)
-
-  const [errors, setErrors] = useState({
-    first_name_error: false,
-    last_name_error: false,
-    state_of_origin_error: false,
-    city_of_origin_error: false,
-    latitude_error: false,
-    lonngitude_error: false,
-  })
+  const { values, empathyField, handleChange } = useForm({ initialState })
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -82,13 +73,6 @@ const AddEditRider = (props) => {
     fileInput.current.value = null
   }
 
-  const verifyLength = (value, length) => {
-    if (value.length >= length) {
-      return true
-    }
-    return false
-  }
-
   const handleImageChange = (e) => {
     const reader = new FileReader()
     const uploadedFile = e.target.files[0]
@@ -99,56 +83,19 @@ const AddEditRider = (props) => {
     reader.readAsDataURL(uploadedFile)
   }
 
-  const handleChange = (prop) => (event) => {
-    const { value } = event.target
-
-    if (
-      prop === "first_name" ||
-      prop === "last_name" ||
-      prop === "state_of_origin" ||
-      prop === "city_of_origin"
-    ) {
-      setValues({ ...values, [prop]: value })
-      setErrors({
-        ...errors,
-        [`${prop}_error`]: !verifyLength(value, 1),
-      })
-    }
-    if (prop === "latitude" || prop === "longitude") {
-      const toFloat = parseFloat(value)
-      if (toFloat) {
-        setValues({ ...values, [prop]: value })
-        setErrors({
-          ...errors,
-          [`${prop}_error`]: false,
-        })
-        return
-      }
-      setValues({ ...values, [prop]: "" })
-      setErrors({
-        ...errors,
-        [`${prop}_error`]: true,
-      })
-    }
-  }
-
   const handleSummit = () => {
-    if (
-      values.first_name &&
-      values.last_name &&
-      values.state_of_origin &&
-      values.city_of_origin &&
-      values.latitude &&
-      values.longitude
-    ) {
+    if (empathyField.length === 0) {
+      const formdata = new FormData()
       if (type === "edit" && rider.id && editRider.status === "idle") {
-        const formdata = new FormData()
-
         if (file) formdata.append("rider[photo]", file)
 
         const valuesKeys = Object.keys(values)
 
         valuesKeys.map((key) => {
+          if (key === "latitude" || key === "longitude") {
+            const value = parseFloat(values[key])
+            return formdata.append(`rider[${key}]`, value)
+          }
           return formdata.append(`rider[${key}]`, values[key])
         })
 
@@ -158,12 +105,16 @@ const AddEditRider = (props) => {
       }
 
       if (type === "add" && addRider.status === "idle") {
-        const formdata = new FormData()
         if (file) formdata.append("rider[photo]", file)
 
         const valuesKeys = Object.keys(values)
 
         valuesKeys.map((key) => {
+          if (key === "latitude" || key === "longitude") {
+            const value = parseFloat(values[key])
+            return formdata.append(`rider[${key}]`, value)
+          }
+
           return formdata.append(`rider[${key}]`, values[key])
         })
         setbBody(formdata)
@@ -207,7 +158,6 @@ const AddEditRider = (props) => {
         Component={
           <Form
             values={values}
-            errors={errors}
             handleChange={handleChange}
             handleSummit={handleSummit}
             type={type}

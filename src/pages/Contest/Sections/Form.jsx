@@ -27,7 +27,7 @@ const CssTextField = withStyles({
 
 const Form = (props) => {
   const classes = formStyles()
-  const { handleChange, values, errors, disableButton, handleSummit } = props
+  const { handleChange, values, disableButton, handleSummit } = props
   return (
     <>
       <Paper className={classes.paper}>
@@ -37,18 +37,20 @@ const Form = (props) => {
               First Name
             </Typography>
             <CssTextField
-              value={values.first_name}
+              value={values.first_name || ""}
               inputProps={{ style: inputProps }}
               variant="outlined"
               id="first name"
-              error={errors.first_name_error}
-              label={errors.first_name_error ? "required" : ""}
-              required={errors.first_name_error}
+              error={values.first_name === ""}
+              label={values.first_name === "" ? "first name" : ""}
+              required={values.first_name === ""}
               InputLabelProps={{
                 shrink: true,
               }}
               fullWidth
-              helperText={errors.first_name_error ? "Incorrect entry." : ""}
+              helperText={
+                values.first_name === "" ? "First name cannot be empathy" : ""
+              }
               size="small"
               onChange={handleChange("first_name")}
             />
@@ -58,19 +60,19 @@ const Form = (props) => {
               Last Name
             </Typography>
             <CssTextField
-              value={values.last_name}
+              value={values.last_name || ""}
               inputProps={{ style: inputProps }}
               variant="outlined"
               id="last name"
-              error={errors.last_name_error}
-              label={errors.last_name_error ? "required" : ""}
-              required={errors.last_name_error}
+              error={values.last_name === ""}
+              label={values.last_name === "" ? "last name" : ""}
+              required={values.last_name === ""}
               InputLabelProps={{
                 shrink: true,
               }}
               fullWidth
               helperText={
-                errors.last_name_error ? "last name cannot be emphty." : ""
+                values.last_name === "" ? "Last name cannot be empathy" : ""
               }
               size="small"
               onChange={handleChange("last_name")}
@@ -81,17 +83,18 @@ const Form = (props) => {
               Email
             </Typography>
             <CssTextField
+              value={values.email || ""}
               inputProps={{ style: inputProps }}
               variant="outlined"
               id="email"
-              error={errors.email_error}
-              label={errors.email_error ? "required" : ""}
-              required={errors.email_error}
+              error={values.email === ""}
+              label={values.email === "" ? "Email" : ""}
+              required={values.email === ""}
               InputLabelProps={{
                 shrink: true,
               }}
               fullWidth
-              helperText={errors.email_error ? "Invalid Email" : ""}
+              helperText={values.email === "" ? "Email cannot be empathy" : ""}
               size="small"
               onChange={handleChange("email")}
             />
@@ -101,18 +104,20 @@ const Form = (props) => {
               Slogan
             </Typography>
             <CssTextField
-              value={values.slogan}
-              inputProps={{ style: inputProps }}
+              value={values.slogan || ""}
+              inputProps={{ style: inputProps, maxLength: 50 }}
               variant="outlined"
               id="slogan"
-              error={errors.slogan_error}
-              label={errors.slogan_error ? "required" : ""}
-              required={errors.slogan_error}
+              error={values.slogan === ""}
+              label={values.slogan === "" ? "Email" : ""}
+              required={values.slogan === ""}
               InputLabelProps={{
                 shrink: true,
               }}
               fullWidth
-              helperText={errors.first_name_error ? "Incorrect entry." : ""}
+              helperText={
+                values.slogan === "" ? "Slogan cannot be empathy" : ""
+              }
               size="small"
               multiline
               rows={2}
@@ -140,7 +145,6 @@ const Form = (props) => {
 Form.propTypes = {
   handleChange: PropTypes.func.isRequired,
   values: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  errors: PropTypes.oneOfType([PropTypes.object]).isRequired,
   disableButton: PropTypes.bool.isRequired,
   handleSummit: PropTypes.func.isRequired,
 }

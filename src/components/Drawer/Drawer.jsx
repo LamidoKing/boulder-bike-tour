@@ -96,7 +96,7 @@ const MiniDrawer = () => {
             <Menu />
           </IconButton>
           <Typography variant="h6" noWrap className={classes.title}>
-            Mini variant drawer
+            Builder Bike Tour
           </Typography>
           <div>
             <AddRider type="add" />
